@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using sportschool.Data;
 using sportschool.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,46 +10,62 @@ namespace sportschool.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private static List<Subscription> subscriptions;
-        private static List<User> users;
-
         // Static constructor om alles correct te initialiseren
-        static UserController()
-        {
-            subscriptions = new List<Subscription>
-            {
-                new() { Id = 0, Name = "Unlimited", SubscriptionType = Subscription.Type.Unlimited },
-                new() { Id = 1, Name = "1 keer in de week", SubscriptionType = Subscription.Type.One },
-                new() { Id = 2, Name = "2 keer in de week", SubscriptionType = Subscription.Type.Two }
-            };
-
-            users = new List<User>
-            {
-                new() { Id = 0, Name = "John Doe", SubscriptionId = 1, Subscription = subscriptions[1] },
-                new() { Id = 1, Name = "Jane Smith", SubscriptionId = 2, Subscription = subscriptions[2] },
-                new() { Id = 2, Name = "Johanna Wilson", SubscriptionId = 0, Subscription = subscriptions[0] }
-            };
-        }
 
         // GET: api/user
         [HttpGet]
         public ActionResult<IEnumerable<User>> Get()
         {
-            return Ok(users);
+            return Ok(DataSportschool.users);
         }
 
         // GET api/user/5
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
-            var user = users.FirstOrDefault(u => u.Id == id);
+            var user = DataSportschool.users.FirstOrDefault(u => u.Id == id);
             if (user == null) return NotFound();
             return Ok(user);
         }
-        // POST api/<ValuesController>
-        [HttpPost]
-        public void MakeAppointmentWithPersonalTrainer([FromBody] string value)
+        public class AppointmentRequestDto
         {
+
+            public int User1Id { get; set; }
+            public int User2Id { get; set; }
+        }
+        // POST api/makeappointmentwithpersonaltrainer
+        [HttpPost("makeAppointment")]
+        public IActionResult MakeAppointmentWithPersonalTrainer([FromBody] AppointmentRequestDto request)
+        {
+            if (request == null)
+                return BadRequest("Invalid request");
+
+            var user1 = DataSportschool.users.FirstOrDefault(u => u.Id == request.User1Id);
+            var user2 = DataSportschool.users.FirstOrDefault(u => u.Id == request.User2Id);
+
+            if (user1 == null || user2 == null)
+                return NotFound("One or both users not found");
+
+            var appointment = new Appointment
+            {
+                Id = DataSportschool.appointments.Count + 1,
+                User1 = user1,
+                User2 = user2,
+            };
+            if (user2.Role != Models.User.Roles.Personal_trainer)
+            {
+                return BadRequest("User is not a personal trainer");
+            }
+
+            DataSportschool.appointments.Add(appointment);
+
+            return Ok(new
+            {
+                Message = "Appointment created",
+                AppointmentId = appointment.Id,
+                User1 = user1.Name,
+                User2 = user2.Name,
+            });
         }
     }
 }
