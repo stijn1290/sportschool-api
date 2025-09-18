@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using sportschool.Data;
 using sportschool.Models;
+using System.Collections.Generic;
 
 namespace sportschool.Controllers
 {
@@ -42,6 +43,9 @@ namespace sportschool.Controllers
             if (coach == null || user == null)
                 return NotFound("One or both users not found");
 
+            if (DataSportschool.appointments.Any(a => a.Coach.Id == request.CoachId && a.User.Id == request.UserId))
+                return BadRequest("User has already booked this coach.");
+
             var appointment = new Appointment
             {
                 Id = DataSportschool.appointments.Count + 1,
@@ -59,5 +63,21 @@ namespace sportschool.Controllers
                 User = user.Name,
             });
         }
+        // GET api/coach/{id}/appointments
+        [HttpGet("{id}/appointments")]
+        public ActionResult<IEnumerable<object>> GetCoachAppointments(int id)
+        {
+            var coach = DataSportschool.coaches.FirstOrDefault(c => c.Id == id);
+            if (coach == null) return NotFound();
+
+            var bookedUsers = DataSportschool.appointments
+                .Where(a => a.Coach.Id == id)
+                .Select(a => new { a.User.Id, a.User.Name })
+                .ToList();
+
+            return Ok(bookedUsers);
+        }
+
+
     }
 }

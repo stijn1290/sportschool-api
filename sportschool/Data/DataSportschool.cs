@@ -6,13 +6,47 @@ namespace sportschool.Data
     public static class DataSportschool
     {
         public static List<Subscription> subscriptions = new List<Subscription>
-            {
-                new () { Id = 0, Name = "Unlimited", SubscriptionType = Subscription.Type.Unlimited
-            },
-                new () { Id = 1, Name = "1 keer in de week", SubscriptionType = Subscription.Type.One
-},
-                new() { Id = 2, Name = "2 keer in de week", SubscriptionType = Subscription.Type.Two }
-            };
+{
+    new () {
+        Id = 0,
+        Name = "Unlimited",
+        SubscriptionType = Subscription.Type.Unlimited,
+        Description = "Best for professionals who want unlimited access",
+        Price = 29.99m,
+        Features = new List<string>
+        {
+            "Onbeperkt Gym toegang",
+            "Gratis coach",
+            "Gratis cursus"
+        }
+    },
+    new () {
+        Id = 1,
+        Name = "Starter",
+        SubscriptionType = Subscription.Type.One,
+        Description = "Best for all beginners",
+        Price = 9.99m,
+        Features = new List<string>
+        {
+            "Gym toegang 1x",
+            "Betaalde coach",
+            "Betaalde cursus"
+        }
+    },
+    new () {
+        Id = 2,
+        Name = "Basic",
+        SubscriptionType = Subscription.Type.Two,
+        Description = "For regulars who want a bit more",
+        Price = 19.99m,
+        Features = new List<string>
+        {
+            "Gym toegang 2x",
+            "Betaalde coach",
+            "Betaalde cursus"
+        }
+    }
+};
 
         public static List<User> users = new List<User>
             {
@@ -23,14 +57,25 @@ namespace sportschool.Data
         public static List<Appointment> appointments = new List<Appointment>();
         public static List<Cursus> cursussen = new List<Cursus>
         {
-            new() { Id = 0, Name = "Yoga", Description = "Een rustgevende cursus waar ontspanning centraal staat", Users = new List<User>() },
-            new() {  Id = 1, Name = "Pilates", Description = "Een cursus gericht op kracht, flexibiliteit en lichaamshouding", Users = new List<User>()},
-            new() { Id = 2, Name = "Paaldansen",Description = "Een uitdagende cursus die kracht en elegantie combineert", Users = new List<User> { users[0] } }
+            new() { Id = 0, Name = "Yoga", Description = "Een rustgevende cursus", Users = new List<User>() },
+            new() { Id = 1, Name = "Pilates", Description = "Een kracht cursus", Users = new List<User>() },
+            new() { Id = 2, Name = "Paaldansen",Description = "Een uitdagende cursus", Users = new List<User>() },
+            new() { Id = 3, Name = "Hit workout", Description = "Een rustgevende cursus", Users = new List<User>() },
+            new() { Id = 4, Name = "Bootcamp", Description = "Een kracht cursus", Users = new List<User>() },
+            new() { Id = 5, Name = "Outdoor",Description = "Een uitdagende cursus", Users = new List<User>() },
+            new() { Id = 6, Name = "Jogging", Description = "Een rustgevende cursus", Users = new List<User>() },
+            new() { Id = 7, Name = "Gym session", Description = "Een kracht cursus", Users = new List<User>() },
         };
         public static List<Coach> coaches = new List<Coach>
         {
             new(){ Id= 0, Name = "Bert"},
             new(){ Id= 1, Name = "Jan"},
+            new(){ Id= 2, Name = "Harrie"},
+            new(){ Id= 3, Name = "Bas"},
+            new(){ Id= 4, Name = "Donald"},
+            new(){ Id= 5, Name = "Bertus"},
+            new(){ Id= 6, Name = "Rens"},
+            new(){ Id= 7, Name = "Johanus"},
         };
     }
 }

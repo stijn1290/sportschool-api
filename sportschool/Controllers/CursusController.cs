@@ -38,9 +38,16 @@ namespace sportschool.Controllers
             var gevondenCursus = DataSportschool.cursussen.FirstOrDefault(c => c.Name == cursus.cursusName);
             if(gevondenCursus == null) return NotFound();
             if(user == null) return NotFound();
+
+            if (gevondenCursus.Users.Any(u => u.Id == cursus.userId))
+                return BadRequest("User is already enrolled in this course.");
+
             gevondenCursus.Users.Add(user);
 
-            return Ok($"{user.Name} je hebt je ingeschreven voor cursus: {cursus.cursusName}");
+            return Ok(new
+            {
+                message = $"{user.Name} je hebt je ingeschreven voor cursus: {cursus.cursusName}"
+            });
         }
         // POST api/uitschrijvencursus
         [HttpPost("uitschrijvencursus")]
