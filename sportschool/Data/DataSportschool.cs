@@ -27,5 +27,10 @@ namespace sportschool.Data
             new() {  Id = 1, Name = "Pilates", Description = "Een cursus gericht op kracht, flexibiliteit en lichaamshouding", Users = new List<User>()},
             new() { Id = 2, Name = "Paaldansen",Description = "Een uitdagende cursus die kracht en elegantie combineert", Users = new List<User> { users[0] } }
         };
+        public static List<Coach> coaches = new List<Coach>
+        {
+            new(){ Id= 0, Name = "Bert"},
+            new(){ Id= 1, Name = "Jan"},
+        };
     }
 }
