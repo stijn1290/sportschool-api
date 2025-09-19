@@ -11,7 +11,7 @@ namespace sportschool.Data
         Id = 0,
         Name = "Unlimited",
         SubscriptionType = Subscription.Type.Unlimited,
-        Description = "Best for professionals who want unlimited access",
+        Description = "Voor unlimited toegang",
         Price = 29.99m,
         Features = new List<string>
         {
@@ -24,7 +24,7 @@ namespace sportschool.Data
         Id = 1,
         Name = "Starter",
         SubscriptionType = Subscription.Type.One,
-        Description = "Best for all beginners",
+        Description = "Beste voor alle beginners",
         Price = 9.99m,
         Features = new List<string>
         {
@@ -37,7 +37,7 @@ namespace sportschool.Data
         Id = 2,
         Name = "Basic",
         SubscriptionType = Subscription.Type.Two,
-        Description = "For regulars who want a bit more",
+        Description = "Voor net iets meer",
         Price = 19.99m,
         Features = new List<string>
         {

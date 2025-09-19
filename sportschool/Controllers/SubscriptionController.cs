@@ -57,8 +57,8 @@ namespace sportschool.Controllers
                 user.WeeklyCheckInCount++;
 
             string remainingMessage = maxCheckIns.HasValue
-                ? $"Check-in successful! You have {maxCheckIns.Value - user.WeeklyCheckInCount} check-ins left this week."
-                : "Check-in successful! You have unlimited check-ins this week.";
+                ? $"Check-in gelukt! Je hebt {maxCheckIns.Value - user.WeeklyCheckInCount} check-ins over deze week."
+                : "Check-in gelukt! Je hebt unlimited check-ins deze week.";
 
             return Ok(new { message = remainingMessage });
         }
@@ -72,7 +72,7 @@ namespace sportschool.Controllers
 
             if (user == null || subscription == null)
             {
-                return BadRequest(new { message = "Invalid user or subscription." });
+                return BadRequest(new { message = "Ongeldige gebruiker of subscriptie." });
             }
 
             user.SubscriptionId = subscription.Id;
@@ -80,7 +80,7 @@ namespace sportschool.Controllers
 
             return Ok(new
             {
-                message = $"Subscription changed to {subscription.Name}.",
+                message = $"Subsciptie veranderd naar {subscription.Name}.",
                 user
             });
         }
@@ -95,7 +95,7 @@ namespace sportschool.Controllers
             user.SubscriptionId = -1;  // remove subscription
             user.Subscription = null;
 
-            return Ok(new { message = "Subscription cancelled successfully." });
+            return Ok(new { message = "Subscriptie is geanuleerd." });
         }
 
 
