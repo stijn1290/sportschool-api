@@ -61,10 +61,6 @@ namespace sportschool.Data
             new() { Id = 1, Name = "Pilates", Description = "Een kracht cursus", Users = new List<User>() },
             new() { Id = 2, Name = "Paaldansen",Description = "Een uitdagende cursus", Users = new List<User>() },
             new() { Id = 3, Name = "Hit workout", Description = "Een rustgevende cursus", Users = new List<User>() },
-            new() { Id = 4, Name = "Bootcamp", Description = "Een kracht cursus", Users = new List<User>() },
-            new() { Id = 5, Name = "Outdoor",Description = "Een uitdagende cursus", Users = new List<User>() },
-            new() { Id = 6, Name = "Jogging", Description = "Een rustgevende cursus", Users = new List<User>() },
-            new() { Id = 7, Name = "Gym session", Description = "Een kracht cursus", Users = new List<User>() },
         };
         public static List<Coach> coaches = new List<Coach>
         {
@@ -72,10 +68,6 @@ namespace sportschool.Data
             new(){ Id= 1, Name = "Jan"},
             new(){ Id= 2, Name = "Harrie"},
             new(){ Id= 3, Name = "Bas"},
-            new(){ Id= 4, Name = "Donald"},
-            new(){ Id= 5, Name = "Bertus"},
-            new(){ Id= 6, Name = "Rens"},
-            new(){ Id= 7, Name = "Johanus"},
         };
     }
 }
